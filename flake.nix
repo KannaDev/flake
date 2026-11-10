@@ -21,7 +21,6 @@
     let
       darwinHosts = {
         HazelsMeowBookPro = ./hosts/HazelsMeowBookPro/default.nix;
-        HazelsMacBookPro = ./hosts/HazelsMacBookPro;
       };
 
       mkDarwinHost =
@@ -52,6 +51,7 @@
       formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt;
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
       darwinConfigurations = builtins.mapAttrs (_: mkDarwinHost) darwinHosts;
-      nixosConfigurations.Hydaelyn = mkNixosHost ./hosts/Hydaelyn/default.nix;
+      nixosConfigurations = { };
+      # nixosConfigurations.Hydaelyn = mkNixosHost ./hosts/Hydaelyn/default.nix;
     };
 }
