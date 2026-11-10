@@ -18,5 +18,6 @@
       dbaeumer.vscode-eslint
       ms-vscode.makefile-tools
     ];
+    profiles.default.userSettings."files.autoSave" = "afterDelay";
   };
 }
