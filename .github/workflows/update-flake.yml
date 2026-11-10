@@ -1,0 +1,47 @@
+name: Update Flake Inputs
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch: # allows manual triggering
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  update-flake:
+    name: Update flake inputs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # @v6.0.2
+
+      - name: Install Lix
+        uses: samueldr/lix-gha-installer-action@8dc19fbd6451fa106a68ecb2dafeeeb90dff3a29
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Update flake.lock
+        id: update
+        uses: DeterminateSystems/update-flake-lock@5ba4a20ae344a5edd7b97ed3002219974f4d20d7
+        with:
+          pr-title: "chore(flake): update inputs"
+          commit-msg: "chore(flake): update inputs"
+          pr-labels: |
+            dependencies
+            automated
+          git-author-name: github-actions[bot]
+          git-author-email: 41898282+github-actions[bot]@users.noreply.github.com
+          git-committer-name: github-actions[bot]
+          git-committer-email: 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Auto-merge PR
+        if: steps.update.outputs.pull-request-number != ''
+        run: gh pr merge --rebase --auto --delete-branch "$PR"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ steps.update.outputs.pull-request-url }}

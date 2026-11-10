@@ -1,5 +1,5 @@
 {
-  description = "hazel's macOS configuration";
+  description = "hazel's Nix configurations";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -10,38 +10,48 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { nix-darwin, home-manager, catppuccin, ... }:
+  outputs =
+    {
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+      catppuccin,
+      ...
+    }:
     let
-      hosts = {
-        HazelsMeowBookPro = ./hosts/HazelsMeowBookPro;
+      darwinHosts = {
+        HazelsMeowBookPro = ./hosts/HazelsMeowBookPro/default.nix;
         HazelsMacBookPro = ./hosts/HazelsMacBookPro;
       };
 
-      mkHost = hostModule:
+      mkDarwinHost =
+        hostModule:
         nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          specialArgs = { inherit catppuccin; };
           modules = [
-            ./modules/lix.nix
             home-manager.darwinModules.home-manager
-            {
-              nixpkgs.config.allowUnfree = true;
+            ./modules/base
+            hostModule
+          ];
+        };
 
-              programs.fish.enable = true;
-
-              users.users.hazel.home = "/Users/hazel";
-              system.stateVersion = 6;
-
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                sharedModules = [ catppuccin.homeModules.catppuccin ];
-                users.hazel = import hostModule;
-              };
-            }
+      mkNixosHost =
+        hostModule:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit catppuccin; };
+          modules = [
+            home-manager.nixosModules.home-manager
+            ./modules/base
+            hostModule
           ];
         };
     in
     {
-      darwinConfigurations = builtins.mapAttrs (_: mkHost) hosts;
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+      darwinConfigurations = builtins.mapAttrs (_: mkDarwinHost) darwinHosts;
+      nixosConfigurations.Hydaelyn = mkNixosHost ./hosts/Hydaelyn/default.nix;
     };
 }

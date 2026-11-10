@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./modules/apps
-    ./modules/nix.nix
+    ./apps
+    ./nix.nix
   ];
 
   home.username = "hazel";

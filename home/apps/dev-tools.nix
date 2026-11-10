@@ -17,6 +17,18 @@
   programs.btop = {
     enable = true;
   };
+
+  programs.ripgrep = {
+    enable = true;
+  };
+
+  programs.fd = {
+    enable = true;
+  };
+
+  programs.jq = {
+    enable = true;
+  };
   programs.fastfetch = {
     enable = true;
   };
