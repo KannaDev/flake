@@ -1,0 +1,9 @@
+# Nix build output
+/result
+/result-*
+
+# direnv cache
+/.direnv/
+
+# macOS metadata
+.DS_Store
