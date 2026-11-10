@@ -17,7 +17,7 @@
           installation_mode = "force_installed";
           updates_disabled = false;
         };
-        "1password-x-password-manager" = {
+        "{d634138d-c276-4fc8-924b-40a0ea21d284}" = {
           install_url = moz "1password-x-password-manager";
           installation_mode = "force_installed";
           updates_disabled = false;
