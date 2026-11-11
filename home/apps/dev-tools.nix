@@ -32,4 +32,19 @@
   programs.fastfetch = {
     enable = true;
   };
+
+  programs.bat = {
+    enable = true;
+  };
+
+  programs.gh = {
+    enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+  };
+
+  home.packages = [ pkgs.wget ];
+
 }

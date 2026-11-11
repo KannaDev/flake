@@ -7,6 +7,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     catppuccin.url = "github:catppuccin/nix";
   };
 
@@ -15,6 +16,7 @@
       nix-darwin,
       nixpkgs,
       home-manager,
+      nix-homebrew,
       catppuccin,
       ...
     }:
@@ -30,6 +32,7 @@
           specialArgs = { inherit catppuccin; };
           modules = [
             home-manager.darwinModules.home-manager
+            nix-homebrew.darwinModules.nix-homebrew
             ./modules/base
             hostModule
           ];
