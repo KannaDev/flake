@@ -4,6 +4,12 @@
   programs.firefox = {
     enable = true;
 
+    policies = {
+    DisablePocket                 = true;
+    DisableTelemetry              = true;
+    DisableFormHistory            = true;
+    DisablePasswordReveal         = true;
+    };
     policies.ExtensionSettings =
       let
         moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
