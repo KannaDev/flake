@@ -49,12 +49,14 @@
             hostModule
           ];
         };
+      nixosHosts = {
+        Tuturu = ./hosts/Tuturu/default.nix;
+      };
     in
     {
       formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt;
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
       darwinConfigurations = builtins.mapAttrs (_: mkDarwinHost) darwinHosts;
-      nixosConfigurations = { };
-      # nixosConfigurations.Hydaelyn = mkNixosHost ./hosts/Hydaelyn/default.nix;
+      nixosConfigurations = builtins.mapAttrs (_: mkNixosHost) nixosHosts;
     };
 }
