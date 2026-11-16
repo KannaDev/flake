@@ -9,7 +9,4 @@
     # Firefox unlocking also requires PolKit to be enabled.
     polkitPolicyOwners = [ "hazel" ];
   };
-
-  # 1password Firefox browser extension support
-  programs._1password.package = pkgs._1password-gui;
 }
