@@ -118,6 +118,10 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Enable Tailscale
+  services.tailscale.enable = true;
+  services.tailscale.openFirewall = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
