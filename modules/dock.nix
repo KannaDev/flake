@@ -17,10 +17,11 @@
       { app = "${config.system.primaryUserHome}/Applications/Home Manager Apps/Firefox.app"; }
       { app = "${config.system.primaryUserHome}/Applications/Home Manager Apps/kitty.app"; }
       { app = "${config.system.primaryUserHome}/Applications/Home Manager Apps/Discord.app"; }
+      { app = "${config.system.primaryUserHome}/Applications/Home Manager Apps/Signal.app"; }
+      { app = "/System/Applications/Messages.app"; }
       { app = "/Applications/1Password.app"; }
       { app = "${config.system.primaryUserHome}/Applications/Home Manager Apps/Spotify.app"; }
       { app = "${config.system.primaryUserHome}/Applications/Home Manager Apps/Visual Studio Code.app"; }
-
     ];
   };
 }

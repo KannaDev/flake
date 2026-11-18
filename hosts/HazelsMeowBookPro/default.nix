@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./dock.nix
-    ./finder.nix
+    ../../modules/dock.nix
+    # ./finder.nix
   ];
 
   users.users.hazel.home = "/Users/hazel";
