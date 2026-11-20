@@ -9,6 +9,14 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    sharedModules = [ catppuccin.homeModules.catppuccin ];
+    sharedModules = [
+      catppuccin.homeModules.catppuccin
+      (
+        { config, ... }:
+        {
+          home.sessionVariables.SOPS_AGE_KEY_FILE = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+        }
+      )
+    ];
   };
 }
