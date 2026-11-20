@@ -17,6 +17,8 @@
       editorconfig.editorconfig
       dbaeumer.vscode-eslint
       ms-vscode.makefile-tools
+      ms-azuretools.vscode-docker
+      ms-dotnettools.csharp
     ];
     profiles.default.userSettings = {
       "terminal.integrated.defaultProfile.osx" = "fish";
